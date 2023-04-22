@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -9,9 +13,8 @@
   }
 }
 
-
 .App-header {
-  background: linear-gradient(to bottom, #e6e6e6, #b39ddb);
+  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -25,49 +28,6 @@
   color: #61dafb;
 }
 
-.login-button {
-  background-color: #b39ddb; /* Light purple */
-    color: #9b86d1;/* Dark gray */
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.login-button:hover {
-  background-color: #9b86d1; /* Lighter purple */
-    color: #7b68ee;
-}
-
-.page-title {
-  font-family: 'Rockwell', sans-serif; /* Your preferred font */
-  font-size: 60px; /* Adjust as desired */
-  color: #9b86d1; /* Lighter purple */
-  text-align: center; /* Center the title */
-}
-
-.title-img{
-    background-image: url('images/musicglass-logo.png');
-    background-size: 150% auto;
-    background-size: contain; /* Set the background size to cover the container */
-      background-position: center;
-    height: 120px;
-    width: 120px;
-    margin-top: 50px;
-    transform: scale(1.1);
-    overflow: hidden;
-}
-
-.h1{
-    margin: none;
-}
-
-body{
-
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -75,9 +35,4 @@ body{
   to {
     transform: rotate(360deg);
   }
-}
-
-@font-face {
-  font-family: 'Rockwell';
-  src: url('fonts/rockwell.ttf'); /* Replace with the path to your Rockwell font file */
 }

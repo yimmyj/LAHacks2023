@@ -2,9 +2,10 @@ import {useEffect,useState} from 'react';
 import './App.css';
 import axios from 'axios';
 
-const querystring = require('querystring');
+import Auth from './components/Auth'
 
 function App() {
+<<<<<<< HEAD
   const CLIENT_IDx = "0e54d22e40f44995a3b7d456f93ce9dc";
   const CLIENT_ID = "4be96af36ff24a7fa610839f52da5344";
 
@@ -14,6 +15,8 @@ function App() {
   const SCOPE = "user-read-private user-read-email user-top-read user-read-recently-played playlist-modify-private playlist-modify-public";
   const SHOW_DIALOG = true;
 
+=======
+>>>>>>> 278c0fb3bee4214a4b0a6c9a7de2e804a879964b
   const [token, setToken] = useState("")
   //const [playlistLink, setPlaylist] = useState("https://open.spotify.com/embed/album/2Yy84EeclNVwFDem6yIB2s?utm_source=generator");
 
@@ -33,17 +36,6 @@ function App() {
     window.localStorage.removeItem("token");
   }
 
-
-  const queryParams = querystring.stringify({
-    client_id: CLIENT_ID,
-    response_type: RESPONSE_TYPE,
-    redirect_uri: REDIRECT_URI,
-    show_dialog: SHOW_DIALOG,
-    scope: SCOPE
-  });
-
-
-
   return (
     <div className="App">
         <header className="App-header">
@@ -52,8 +44,7 @@ function App() {
             </h1>
 
             {!token ?
-                <a className = "login-button" href={`${AUTH_ENDPOINT}?${queryParams}`}>Login
-                    to Spotify</a>
+                <Auth />
                 : <><button onClick={logout}>Logout</button></>
                 }
         </header>
