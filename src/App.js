@@ -282,7 +282,9 @@ function App() {
 
   return (
     <div className="App">
+      
         <header className="App-header">
+        
         <img className="title-img" src={require('./images/musicglass-logo.png')} alt="Logo"/>
             <h1 className="page-title">Music Glass
             </h1>

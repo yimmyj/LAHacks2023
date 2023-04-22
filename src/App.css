@@ -1,5 +1,13 @@
 .App {
   text-align: center;
+  /* background-image: url('./images/dune.png'); */
+/* background-color: rgb(108,92,140); */
+background: linear-gradient(180deg, rgb(115, 87, 169) 0%, rgb(97, 209, 114) 80%); 
+/* background-color: green; */
+  background-image: linear-gradient(to bottom, rgba(115,87,169,0.7), rgba(97,209, 114,0)),url("./images/dune.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .App-logo {
@@ -14,7 +22,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  /* background-color: #282c34; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,6 +30,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  
 }
 
 .App-link {
@@ -36,3 +45,5 @@
     transform: rotate(360deg);
   }
 }
+
+
