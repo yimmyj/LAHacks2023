@@ -1,14 +1,39 @@
 .App {
   text-align: center;
-  /* background-image: url('./images/dune.png'); */
+  /* background-image: url('./images/dune.png');  */
 /* background-color: rgb(108,92,140); */
-background: linear-gradient(180deg, rgb(115, 87, 169) 0%, rgb(97, 209, 114) 80%); 
-/* background-color: green; */
-  background-image: linear-gradient(to bottom, rgba(115,87,169,0.7), rgba(97,209, 114,0)),url("./images/dune.png");
+ /* background: linear-gradient(180deg, rgb(115, 87, 169) 0%, rgb(97, 209, 114) 80%);   */
+ /* background-color: green;  */
+
+
+  background-image: linear-gradient(to bottom, rgb(101, 73, 159), rgba(240, 240, 1  , 0.1)),url("./images/dune.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
+
+/* .App::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgb(101, 73, 159), rgba(240, 240, 1  , 0.1));
+  z-index: 2;
+}
+
+.App::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./images/dune.png');
+  background-size: cover;
+  z-index: 1;
+} */
 
 .App-logo {
   height: 40vmin;
@@ -47,3 +72,15 @@ background: linear-gradient(180deg, rgb(115, 87, 169) 0%, rgb(97, 209, 114) 80%)
 }
 
 
+.title-img{
+width: 500.01px;
+height: 500.17px;
+transform: rotate(7deg);
+position: fixed;
+bottom: 100px;
+right: -10px;
+/* width: 300px; */
+/* border: 3px solid #73AD21; */
+z-index:-1;
+/* background-color: #61dafb; */
+}
