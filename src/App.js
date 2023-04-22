@@ -9,7 +9,6 @@ import Playlist from './components/Playlist'
 
 function App() {
   const [token, setToken] = useState("")
-
   const [userID, setID] = useState("")
   const [userData, setUserData] = useState({})
   const [recents, setRecents] = useState([])
@@ -36,6 +35,7 @@ function App() {
     setUserData({});
     setRecents([]);
     setFavorites([]);
+    setPlaylist("");
     window.localStorage.removeItem("token");
   }
 
