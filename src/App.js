@@ -244,17 +244,18 @@ function App() {
     <div className="App">
       
       <header className="App-header">
+      <img className="title-img" src={require('./images/hourglass.png')} alt="Logo"/>
+        <div class="login-block">
+          
+          <h1 className="page-title">Music Glass</h1>
         
-
-        <img className="title-img" src={require('./images/hourglass.png')} alt="Logo"/>
-        <h1 className="page-title">Music Glass</h1>
         {!token ?
             <Auth /> : <Playlist playlistLink={playlistLink}/>
           }
           {renderFavorites()}
           <User userData={userData} logoutHandler={logout}/>
 
-
+          </div>
         </header>
         
     </div>
