@@ -246,7 +246,7 @@ function App() {
       <header className="App-header">
         
 
-        <img className="title-img" src={require('./images/musicglass-logo.png')} alt="Logo"/>
+        <img className="title-img" src={require('./images/hourglass.png')} alt="Logo"/>
         <h1 className="page-title">Music Glass</h1>
         {!token ?
             <Auth /> : <Playlist playlistLink={playlistLink}/>
