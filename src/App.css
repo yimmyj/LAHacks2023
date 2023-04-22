@@ -32,10 +32,18 @@
   border-radius: 2rem;
   text-decoration: none;
   color: white;
-  background-color: 	#D3D3D3;
+  background-color: 	#6658ab;
   opacity: 0.9;
   font-family: 'Quicksand';
   margin-top: -25px;
+  
+  /* width: 100%; */
+}
+
+.login-button:hover{
+  /* color: black; */
+  background-color: #48398f;
+  
   /* width: 100%; */
 }
 
