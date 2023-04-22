@@ -5,6 +5,7 @@ import axios from 'axios';
 import Auth from './components/Auth'
 import Button from './components/Button'
 import User from './components/User'
+import Playlist from './components/Playlist'
 
 function App() {
   const [token, setToken] = useState("")
@@ -15,7 +16,7 @@ function App() {
   const [favorites, setFavorites] = useState([])
   const [mins, setMins] = useState(null);
   const [secs, setSecs] = useState(null);
-  const [playlistLink, setPlaylist] = useState("https://open.spotify.com/embed/album/2Yy84EeclNVwFDem6yIB2s?utm_source=generator");
+  const [playlistLink, setPlaylist] = useState("");
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -242,27 +243,18 @@ function App() {
   return (
     <div className="App">
       
-        <header className="App-header">
+      <header className="App-header">
         
         <img className="title-img" src={require('./images/musicglass-logo.png')} alt="Logo"/>
-            <h1 className="page-title">Music Glass
-            </h1>
+        <h1 className="page-title">Music Glass</h1>
+        {!token ?
+            <Auth /> : <Playlist playlistLink={playlistLink}/>
+          }
+          {renderFavorites()}
+          <User userData={userData} logoutHandler={logout}/>
 
-            {!token ?
-                <Auth /> :
-                <>
-                  <iframe src={playlistLink}
-                          width="50%"
-                          height="380" 
-                          frameBorder="0" 
-                          allowFullScreen="" 
-                          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                          loading="lazy"></iframe>
-                </>
-              }
-              {renderFavorites()}
-              <User userData={userData} logoutHandler={logout}/>
         </header>
+
     </div>
   );
 }
