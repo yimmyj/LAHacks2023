@@ -5,7 +5,8 @@ import axios from 'axios';
 const querystring = require('querystring');
 
 function App() {
-  const CLIENT_ID = "0e54d22e40f44995a3b7d456f93ce9dc";
+  const CLIENT_IDx = "0e54d22e40f44995a3b7d456f93ce9dc";
+  const CLIENT_ID = "4be96af36ff24a7fa610839f52da5344";
 
   const REDIRECT_URI = "http://localhost:3000/";
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
