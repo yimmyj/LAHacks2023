@@ -7,7 +7,6 @@ import Button from './components/Button'
 
 function App() {
   const [token, setToken] = useState("")
-  //const [playlistLink, setPlaylist] = useState("https://open.spotify.com/embed/album/2Yy84EeclNVwFDem6yIB2s?utm_source=generator");
 
   const [userID, setID] = useState("")
   const [userData, setUserData] = useState({})
@@ -62,11 +61,12 @@ function App() {
       return (
         <div>
           <p>
-            Display Name: {userData["display_name"]}
+            User found: {userData["display_name"]}
           </p>
           <p>
-            <img src={userData["images"][0]["url"]} alt="pfp"/>
+          Not you? <Button onClick={logout} text="Log out"/>
           </p>
+          
         </div>
       );
   }
@@ -293,7 +293,7 @@ function App() {
             {!token ?
                 <Auth /> :
                 <>
-                  <Button onClick={logout} text="Logout"/>
+                  
                   <iframe src={playlistLink}
                                           width="50%" height="380" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                                           loading="lazy"></iframe>
