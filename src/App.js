@@ -25,6 +25,8 @@ function App() {
       window.location.hash = "";
       window.localStorage.setItem("token", token);
       setToken(token);
+      findUser(token);
+      loadEverything(token);
     }
   }, [])
 
@@ -36,9 +38,8 @@ function App() {
     window.localStorage.removeItem("token");
   }
 
-  const findUser = async (e) => {
-  console.log("FindUser clicked!!!!!");
-    e.preventDefault()
+  const findUser = async (token) => {
+    console.log("FindUser clicked!!!!!");
     const {data} = await axios.get("https://api.spotify.com/v1/me", {
         headers: {
             Authorization: `Bearer ${token}`
@@ -48,9 +49,9 @@ function App() {
     setID(data.id);
   }
 
-  const loadEverything = async (e) => {
-  console.log("LoadEverything clicked!!!!!");
-  getFavorites(token, "medium");
+  const loadEverything = async (token) => {
+    console.log("LoadEverything clicked!!!!!");
+    getFavorites(token, "medium");
   }
 
   const renderUser = () => {
@@ -293,10 +294,8 @@ function App() {
                 <Auth /> :
                 <>
                   <Button onClick={logout} text="Logout"/>
-                  <Button onClick={findUser} text="Find User"/>
-                  <Button onClick={loadEverything} text="Load Information"/>
                   <iframe src={playlistLink}
-                                          width="50%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                          width="50%" height="380" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                                           loading="lazy"></iframe>
                 </>
                 }
