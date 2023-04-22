@@ -17,10 +17,11 @@
 }
 
 .login-block{
-  /* background-color: blue; */
   display: flex;
   flex-direction: column;
-  width: 25rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .login-button{
@@ -31,6 +32,7 @@
   padding-bottom: 0.25rem;
   border-radius: 2rem;
   text-decoration: none;
+  width: 25rem;
   color: white;
   background-color: 	#6658ab;
   opacity: 0.9;
@@ -42,6 +44,7 @@
 
 .login-button:hover{
   /* color: black; */
+  
   background-color: #48398f;
   
   /* width: 100%; */
@@ -50,7 +53,7 @@
 .App-header h1{
   font-family: 'Quicksand';
   /* background-color: black; */
-  /* width: 100%; */
+  width: 100%;
 }
 
 .App-logo {
