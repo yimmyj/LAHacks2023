@@ -8,6 +8,14 @@ function App() {
   const [token, setToken] = useState("")
   //const [playlistLink, setPlaylist] = useState("https://open.spotify.com/embed/album/2Yy84EeclNVwFDem6yIB2s?utm_source=generator");
 
+  const [userID, setID] = useState("")
+  const [userData, setUserData] = useState({})
+  const [recents, setRecents] = useState([])
+  const [favorites, setFavorites] = useState([])
+  const [mins, setMins] = useState(null);
+  const [secs, setSecs] = useState(null);
+  const [playlistLink, setPlaylist] = useState("https://open.spotify.com/embed/album/2Yy84EeclNVwFDem6yIB2s?utm_source=generator");
+
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
@@ -22,8 +30,255 @@ function App() {
 
   const logout = () => {
     setToken("");
+    setUserData({});
+    setRecents([]);
+    setFavorites([]);
     window.localStorage.removeItem("token");
   }
+
+  const findUser = async (e) => {
+  console.log("FindUser clicked!!!!!");
+    e.preventDefault()
+    const {data} = await axios.get("https://api.spotify.com/v1/me", {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    setUserData(data);
+    setID(data.id);
+  }
+
+  const loadEverything = async (e) => {
+  console.log("LoadEverything clicked!!!!!");
+  getFavorites(token, "medium");
+  }
+
+  const renderUser = () => {
+    if(Object.keys(userData).length === 0){
+      return;
+    }
+    else
+      return (
+        <div>
+          <p>
+            Display Name: {userData["display_name"]}
+          </p>
+          <p>
+            <img src={userData["images"][0]["url"]} alt="pfp"/>
+          </p>
+        </div>
+      );
+  }
+
+  const renderRecent = () => {
+    if(recents.length === 0){
+      return;
+    }
+    else{
+      let options = []
+      for(let i=0; i<recents.items.length; i++){
+        options.push({key: i, name: recents.items[i].track.name, artist: recents.items[i].track.artists[0].name})
+      }
+      return (
+        <div>
+          <label>Recently Listened</label><br></br>
+          <select>
+            {options.map(item => {
+                return (<option key={item.key} value={item.key}>{item.name + " by "+ item.artist}</option>);
+            })}
+          </select>
+        </div>
+      )
+    }
+  }
+
+  const getFavorites = async (token) => {
+      const {data} = await axios.get("https://api.spotify.com/v1/me/top/tracks", {
+          headers: {
+              Authorization: `Bearer ${token}`
+          }
+      })
+      console.log(data)
+      setFavorites(data)
+    }
+
+
+    const renderFavorites = () => {
+    console.log("RenderFavorites called!!!");
+      if(favorites.length === 0){
+        return;
+      }
+      else{
+        let options = []
+        //let topTracks = []
+        let favoritesInfo = []
+        for(let i=0; i<favorites.items.length; i++){
+          favoritesInfo.push({key:i, duration: Math.round(favorites.items[i].duration_ms/1000),
+          uri: favorites.items[i].uri});
+
+          options.push({key: i, name: favorites.items[i].name, artist: favorites.items[i].artists[0].name})
+        }
+        //let pickedSongs = generatePlaylist(1200, trackLengths);
+
+        /*for(let i=0; i<favorites.items.length; i++){
+           topTracks.push({key: i, duration: favorites.items[i].duration_ms,
+           id: favorites.items[i].id, uri: favorites.items[i].uri, name: favorites.items[i].name})
+        }*/
+        return (
+          <div>
+           <input
+                     type="number"
+                     value={mins}
+                     placeholder="minutes"
+                     min = "0" max = "59"
+                     onChange={(e) => setMins(e.target.value)}
+                   />
+           <input
+                     type="number"
+                     value={secs}
+                     placeholder="seconds"
+                     min = "0" max = "59"
+                     onChange={(e) => setSecs(e.target.value)}
+                              />
+
+            <button id="button3" onClick={() => createActualPlaylist(mins, secs, favoritesInfo)}> Create Playlist </button>
+          </div>
+        )
+      }
+    }
+
+  const generatePlaylist = (targetTime, songs) => {
+      //let songs =
+      const table = Array(songs.length+1).fill()
+      .map(() => Array(targetTime+1).fill(false));
+
+      for (let i = 0; i <= songs.length; i++) {
+              table[i][0] = true;
+          }
+
+          for (let i = 1; i <= songs.length; i++) {
+              for (let j = 1; j <= targetTime; j++) {
+                  if (j - songs[i - 1] >= 0) {
+                      table[i][j] = table[i - 1][j] || table[i - 1][j - songs[i - 1]];
+                  } else {
+                      table[i][j] = table[i-1][j];
+                  }
+              }
+          }
+          let currentCol = 0;
+
+          for (let j = targetTime; j >= 0; j--){
+              if (table[songs.length][j] !== false){
+                  currentCol = j;
+                  break;
+              }
+          }
+
+          console.log("Closest time: " + currentCol);
+
+
+          let currentRow = songs.length;
+          let pickedSongs = [];
+
+
+          while (currentCol > 0 && currentRow > 0){
+              if (table[currentRow][currentCol - songs[currentRow - 1]]){
+                  pickedSongs.push(currentRow-1);
+                  currentCol -= songs[currentRow - 1];
+                  currentRow--;
+              }
+              else if(currentCol > 0 && currentRow > 0 && (table[currentRow-1][currentCol])){
+                  currentRow--;
+              }
+          }
+          console.log(pickedSongs);
+          return(pickedSongs);
+  }
+
+  const shuffle = (array) => {
+    let currentIndex = array.length,  randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex !== 0) {
+
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+  }
+
+  const reformatSeconds = (time) => {
+   let seconds = time % 60;
+   let minutes = Math.floor(time/60);
+
+   if (seconds < 10) seconds = "0"+seconds;
+   if (minutes < 10) minutes = "0"+minutes;
+   return minutes+":"+seconds;
+  }
+
+ const createActualPlaylist = async(mins, secs, tracks) => {
+    if (mins > 59 || mins < 0 || secs < 0 || secs > 59){
+    alert("Not valid time");
+    return;
+    }
+ //UsableSongs should be an array with key=duration: value= song length in seconds,
+ //key=uri: value = spotify URI of the track
+    let usableSongs = shuffle(tracks);
+    let time = 60 * Number(mins) + Number(secs);
+    if (secs < 10) secs = '0'+secs;
+
+     let trackLengths = [];
+     for(let i=0; i<usableSongs.length; i++){
+              trackLengths.push(usableSongs[i].duration);
+      }
+
+     let pickedSongs = generatePlaylist(time, trackLengths);
+
+     if (pickedSongs.length === 0){
+     alert("Time picked is too short!");
+     return;
+     }
+
+     let pickedSongsString = usableSongs[pickedSongs[0]].uri;
+     let actualTime = trackLengths[pickedSongs[0]];
+
+     for (let i=1; i<pickedSongs.length; i++){
+       pickedSongsString += ',';
+       pickedSongsString += usableSongs[pickedSongs[i]].uri;
+       actualTime += trackLengths[pickedSongs[i]];
+     }
+
+     if (actualTime / time < 0.96){
+     alert("ERROR: Unable to generate");
+     return;
+     }
+
+     let payload = { name: 'Your ' + mins +':'+secs+' playlist',
+     description: 'Duration: '+ reformatSeconds(actualTime) + '  |  Generated with Musicglass', public: 'false' };
+
+     const playlistRes = await axios.post("https://api.spotify.com/v1/users/"+userID+"/playlists", payload, {
+                  headers: {
+                      Authorization: `Bearer ${token}`
+              }})
+
+     let playlistData = playlistRes.data;
+     let playlist_id = playlistData.id;
+     const addSongsRes = await axios.post("https://api.spotify.com/v1/playlists/"+playlist_id+"/tracks?uris="+pickedSongsString, {}, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                    }})
+
+     setPlaylist("https://open.spotify.com/embed/playlist/"+playlist_id+"?utm_source=generator");
+     console.log("PlaylistLink is: " + playlistLink);
+ }
+
+
 
   return (
     <div className="App">
@@ -34,8 +289,16 @@ function App() {
 
             {!token ?
                 <Auth />
-                : <><button onClick={logout}>Logout</button></>
+                : <><button onClick={logout}>Logout</button>
+                <button id="findUserButton" onClick={findUser}>Find User</button>
+                <button id="loadInfoButton" onClick={loadEverything}>Load Information</button>
+                <iframe src={playlistLink}
+                                        width="50%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                        loading="lazy"></iframe></>
                 }
+                {renderRecent()}
+                {renderFavorites()}
+                {renderUser()}
         </header>
     </div>
   );
