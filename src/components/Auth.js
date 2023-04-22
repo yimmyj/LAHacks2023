@@ -1,6 +1,6 @@
 const querystring = require('querystring');
 
-const CLIENT_ID = "0e54d22e40f44995a3b7d456f93ce9dc";
+const CLIENT_ID = "f7c40db261574146a1341b89f2d76bfb";
 const REDIRECT_URI = "http://localhost:3000/";
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const RESPONSE_TYPE = "token";
