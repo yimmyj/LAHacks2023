@@ -244,22 +244,20 @@ function App() {
     <div className="App">
       
       <header className="App-header">
-        
-
+      
         <img className="title-img" src={require('./images/hourglass.png')} alt="Logo"/>
         <h1 className="page-title">Music Glass</h1>
         {!token ?
-            <Auth /> : <Playlist playlistLink={playlistLink}/>
-          }
-          {renderFavorites()}
-          <User userData={userData} logoutHandler={logout}/>
+          <Auth /> : <Playlist playlistLink={playlistLink}/>
+        }
+        {renderFavorites()}
+        <User userData={userData} logoutHandler={logout}/>
 
 
-        </header>
+      </header>
         
     </div>
   );
 }
 
-// wdqw
 export default App;
