@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios';
 
 import Auth from './components/Auth'
+import Button from './components/Button'
 
 function App() {
   const [token, setToken] = useState("")
@@ -25,7 +26,6 @@ function App() {
       window.localStorage.setItem("token", token);
       setToken(token);
     }
-    console.log(token);
   }, [])
 
   const logout = () => {
@@ -288,13 +288,15 @@ function App() {
             </h1>
 
             {!token ?
-                <Auth />
-                : <><button onClick={logout}>Logout</button>
-                <button id="findUserButton" onClick={findUser}>Find User</button>
-                <button id="loadInfoButton" onClick={loadEverything}>Load Information</button>
-                <iframe src={playlistLink}
-                                        width="50%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                                        loading="lazy"></iframe></>
+                <Auth /> :
+                <>
+                  <Button onClick={logout} text="Logout"/>
+                  <Button onClick={findUser} text="Find User"/>
+                  <Button onClick={loadEverything} text="Load Information"/>
+                  <iframe src={playlistLink}
+                                          width="50%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                          loading="lazy"></iframe>
+                </>
                 }
                 {renderRecent()}
                 {renderFavorites()}
