@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Auth from './components/Auth'
 import Button from './components/Button'
+import User from './components/User'
 
 function App() {
   const [token, setToken] = useState("")
@@ -53,46 +54,6 @@ function App() {
     getFavorites(token, "medium");
   }
 
-  const renderUser = () => {
-    if(Object.keys(userData).length === 0){
-      return;
-    }
-    else
-      return (
-        <div>
-          <p>
-            User found: {userData["display_name"]}
-          </p>
-          <p>
-          Not you? <Button onClick={logout} text="Log out"/>
-          </p>
-          
-        </div>
-      );
-  }
-
-  const renderRecent = () => {
-    if(recents.length === 0){
-      return;
-    }
-    else{
-      let options = []
-      for(let i=0; i<recents.items.length; i++){
-        options.push({key: i, name: recents.items[i].track.name, artist: recents.items[i].track.artists[0].name})
-      }
-      return (
-        <div>
-          <label>Recently Listened</label><br></br>
-          <select>
-            {options.map(item => {
-                return (<option key={item.key} value={item.key}>{item.name + " by "+ item.artist}</option>);
-            })}
-          </select>
-        </div>
-      )
-    }
-  }
-
   const getFavorites = async (token) => {
       const {data} = await axios.get("https://api.spotify.com/v1/me/top/tracks", {
           headers: {
@@ -102,7 +63,6 @@ function App() {
       console.log(data)
       setFavorites(data)
     }
-
 
     const renderFavorites = () => {
     console.log("RenderFavorites called!!!");
@@ -279,8 +239,6 @@ function App() {
      console.log("PlaylistLink is: " + playlistLink);
  }
 
-
-
   return (
     <div className="App">
       
@@ -293,15 +251,17 @@ function App() {
             {!token ?
                 <Auth /> :
                 <>
-                  
                   <iframe src={playlistLink}
-                                          width="50%" height="380" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                                          loading="lazy"></iframe>
+                          width="50%"
+                          height="380" 
+                          frameBorder="0" 
+                          allowFullScreen="" 
+                          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                          loading="lazy"></iframe>
                 </>
-                }
-                {renderRecent()}
-                {renderFavorites()}
-                {renderUser()}
+              }
+              {renderFavorites()}
+              <User userData={userData} logoutHandler={logout}/>
         </header>
     </div>
   );
