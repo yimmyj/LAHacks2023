@@ -4,10 +4,11 @@ import axios from 'axios';
 
 import Auth from './components/Auth'
 import Button from './components/Button'
+import User from './components/User'
+import Playlist from './components/Playlist'
 
 function App() {
   const [token, setToken] = useState("")
-  //const [playlistLink, setPlaylist] = useState("https://open.spotify.com/embed/album/2Yy84EeclNVwFDem6yIB2s?utm_source=generator");
 
   const [userID, setID] = useState("")
   const [userData, setUserData] = useState({})
@@ -15,7 +16,7 @@ function App() {
   const [favorites, setFavorites] = useState([])
   const [mins, setMins] = useState(null);
   const [secs, setSecs] = useState(null);
-  const [playlistLink, setPlaylist] = useState("https://open.spotify.com/embed/album/2Yy84EeclNVwFDem6yIB2s?utm_source=generator");
+  const [playlistLink, setPlaylist] = useState("");
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -54,45 +55,6 @@ function App() {
     getFavorites(token, "medium");
   }
 
-  const renderUser = () => {
-    if(Object.keys(userData).length === 0){
-      return;
-    }
-    else
-      return (
-        <div>
-          <p>
-            Display Name: {userData["display_name"]}
-          </p>
-          <p>
-            <img src={userData["images"][0]["url"]} alt="pfp"/>
-          </p>
-        </div>
-      );
-  }
-
-  const renderRecent = () => {
-    if(recents.length === 0){
-      return;
-    }
-    else{
-      let options = []
-      for(let i=0; i<recents.items.length; i++){
-        options.push({key: i, name: recents.items[i].track.name, artist: recents.items[i].track.artists[0].name})
-      }
-      return (
-        <div>
-          <label>Recently Listened</label><br></br>
-          <select>
-            {options.map(item => {
-                return (<option key={item.key} value={item.key}>{item.name + " by "+ item.artist}</option>);
-            })}
-          </select>
-        </div>
-      )
-    }
-  }
-
   const getFavorites = async (token) => {
       const {data} = await axios.get("https://api.spotify.com/v1/me/top/tracks", {
           headers: {
@@ -102,7 +64,6 @@ function App() {
       console.log(data)
       setFavorites(data)
     }
-
 
     const renderFavorites = () => {
     console.log("RenderFavorites called!!!");
@@ -279,30 +240,23 @@ function App() {
      console.log("PlaylistLink is: " + playlistLink);
  }
 
-
-
   return (
     <div className="App">
       
-        <header className="App-header">
+      <header className="App-header">
         
-        <img className="title-img" src={require('./images/hourglass.png')} alt="Logo"/>
-            <h1 className="page-title">Music Glass
-            </h1>
 
-            {!token ?
-                <Auth /> :
-                <>
-                  <Button onClick={logout} text="Logout"/>
-                  <iframe src={playlistLink}
-                                          width="50%" height="380" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                                          loading="lazy"></iframe>
-                </>
-                }
-                {renderRecent()}
-                {renderFavorites()}
-                {renderUser()}
+        <img className="title-img" src={require('./images/musicglass-logo.png')} alt="Logo"/>
+        <h1 className="page-title">Music Glass</h1>
+        {!token ?
+            <Auth /> : <Playlist playlistLink={playlistLink}/>
+          }
+          {renderFavorites()}
+          <User userData={userData} logoutHandler={logout}/>
+
+
         </header>
+
     </div>
   );
 }
