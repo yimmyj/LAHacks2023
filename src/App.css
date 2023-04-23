@@ -37,7 +37,13 @@
   background-color: 	#48398f;
   opacity: 0.9;
   font-family: 'Quicksand';
-  margin-top: -25px;
+  margin-top: -20px;
+
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
   
   /* width: 100%; */
 }
@@ -214,4 +220,10 @@ button:hover{
 
 .subbutton{
   background-color: #48398f;
+}
+
+.icon {
+  margin-left: 1rem;
+  width: 2rem;
+  /* background-color: #24146d; */
 }
