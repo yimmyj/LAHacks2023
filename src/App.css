@@ -77,7 +77,9 @@ button {
   padding-right: 0.25rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
-  margin: 0.25rem;
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+  
   font-family: 'Quicksand';
   /* font-size: large; */
   border: 0;
@@ -90,14 +92,70 @@ button {
   background-color: 	#D3D3D3;
 }
 
+/* .rendered{ */
+  /* background-color: #24146d; */
+/* } */
+
+.rendered input{
+  background-color: #48398f;
+  width: 3rem;
+}
+
+.rendered button{
+  background-color: #48398f;
+}
+
+#rec{
+  display: none;
+  margin-bottom: -0.5rem;
+  font-size: 1rem;
+  /* background-color: #24146d; */
+}
+
 .input:focus {
   outline-width: 0;
   color: white;
 }
 
-.input::-webkit-inner-spin-button {
+/* Customize the appearance of the spin buttons */
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  
+}
+
+input[type="number"]::-webkit-outer-spin-button {
+  background-color: #0f0;
+  color: #fff;
+  padding: 0.5em;
+  font-size: 1.2em;
+}
+
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  color: red;
+}
+
+/* input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+} */
+
+form button{
+  margin-left: 1rem;
+  background-color: #48398f;
+}
+
+form button:hover{
+  background-color: #24146d;
+}
+
+input[type="text"] {
+  width: 25rem;
+  font-family: 'Quicksand';
+  /* border-radius: 1rem; */
+  font-size: 1.1rem;
 }
 
 .text {
@@ -110,7 +168,15 @@ button {
   font-family: 'Quicksand';
   /* background-color: black; */
   width: 100%;
+  margin-top: 5rem;
 }
+
+.App-header iframe{
+  /* background-color: #24146d; */
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
+
 
 .App-logo {
   height: 40vmin;
@@ -157,11 +223,12 @@ button {
   width: 30vw; /* Adjust the value as needed */
 transform: rotate(7deg);
 position: fixed;
-bottom: 7.5vh;
-right: -2vw;
+bottom: 9.5vh;
+right: 0vw;
 /* width: 300px; */
 /* border: 3px solid #73AD21; */
 z-index:-1;
+animation: rotate-back-and-forth 3s ease-in-out infinite;
 /* background-color: #61dafb; */
 }
 
@@ -177,11 +244,11 @@ z-index:-1;
 
 
 .div1 button{
-  /* margin-top: 0px; */
+  margin-top: -1rem;
   padding: none;
   background-color: #48398f;
   font-size: 1.2rem;
-  margin-top: auto;
+  /* margin-top: auto; */
 }
 .div1 button:hover{
 
@@ -227,3 +294,16 @@ button:hover{
   width: 2rem;
   /* background-color: #24146d; */
 }
+
+@keyframes rotate-back-and-forth {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
