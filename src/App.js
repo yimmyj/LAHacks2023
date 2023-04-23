@@ -187,13 +187,12 @@ function App() {
     return array;
   }
 
-  const reformatSeconds = (time) => {
-   let seconds = time % 60;
-   let minutes = Math.floor(time/60);
-
-   if (0 < seconds < 10) seconds = "0"+seconds;
-   if (0 < minutes < 10) minutes = "0"+minutes;
-   return minutes+":"+seconds;
+  function reformatSeconds(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+    return `${formattedMinutes}:${formattedSeconds}`;
   }
 
  const createActualPlaylist = async(mins, secs, tracks) => {
@@ -235,8 +234,8 @@ function App() {
      return;
      }
 
-     let payload = { name: 'Your ' + mins +':'+secs+' playlist',
-     description: 'Duration: '+ reformatSeconds(actualTime) + '  |  Generated with Musicglass', public: 'false' };
+     let payload = { name: 'Your ' + reformatSeconds(actualTime) + ' playlist',
+     description: 'Tags applied: '+ actualInput + '  |  Generated with Musicglass', public: 'false' };
 
      const playlistRes = await axios.post("https://api.spotify.com/v1/users/"+userID+"/playlists", payload, {
                   headers: {
