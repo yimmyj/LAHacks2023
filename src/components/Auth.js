@@ -19,6 +19,7 @@ const Auth = () => {
     return (
         <a className = "login-button" href={`${AUTH_ENDPOINT}?${queryParams}`}>
             Login to Spotify
+            <img class = 'icon' src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/1982px-Spotify_icon.svg.png'></img>
         </a>
     )
 }
