@@ -13,7 +13,7 @@ const ChatBox = ({ onResponseArrayChange }) => {
   }, [responseArray, onResponseArrayChange]);
 
   const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: "PUT_KEY_HERE",
   });
   delete configuration.baseOptions.headers['User-Agent'];
   const openai = new OpenAIApi(configuration);
