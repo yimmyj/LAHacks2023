@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 const { Configuration, OpenAIApi } = require("openai");
 
-const ChatBox = () => {
+const ChatBox = ({ onResponseArrayChange }) => {
+
 
   const [input, setInput] = useState('');
   const [response, setResponse] = useState("");
   const [responseArray, setResponseArray] = useState([]);
+
+  useEffect(() => {
+    onResponseArrayChange(responseArray);
+  }, [responseArray, onResponseArrayChange]);
 
   const configuration = new Configuration({
     apiKey: "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",

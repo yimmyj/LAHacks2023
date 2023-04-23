@@ -18,6 +18,13 @@ function App() {
   const [secs, setSecs] = useState(null);
   const [playlistLink, setPlaylist] = useState("");
 
+  const [genresList, setGenresList] = useState("[]");
+
+  function handleGenresListChange(newGenres) {
+    setGenresList(newGenres);
+    console.log(genresList);
+  }
+
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
@@ -257,7 +264,7 @@ function App() {
           <Auth /> : 
           <>
             <Playlist playlistLink={playlistLink}/>
-            <ChatBox />
+            <ChatBox onResponseArrayChange={handleGenresListChange}/>
           </>
         }
         {renderFavorites()}
