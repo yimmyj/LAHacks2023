@@ -4,7 +4,8 @@ const { Configuration, OpenAIApi } = require("openai");
 const ChatBox = () => {
 
   const [input, setInput] = useState('');
-  const [response, setResponse] = useState('');
+  const [response, setResponse] = useState("");
+  const [responseArray, setResponseArray] = useState([]);
 
   const configuration = new Configuration({
     apiKey: "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",
@@ -20,11 +21,29 @@ const ChatBox = () => {
     });
     console.log(res.data.choices[0].message.content);
     setResponse(res.data.choices[0].message.content);
+
+    let regexd = extractTerms(res.data.choices[0].message.content);
+    console.log(regexd)
+    if (regexd[0] !== "invalid"){
+      setResponseArray(regexd)
+    }
   }
   
   const handleInputChange = (event) => {
     setInput(event.target.value);
   }
+
+  function extractTerms(str) {
+    try{
+    const regex = /#(\w+-?\w*)/g;
+    const result = str.match(regex).map(match => match.replace("#", ""));
+    return result;
+    }
+    catch(e){
+      return ["invalid"]
+    }
+  }
+
 
   return (
     <div>
