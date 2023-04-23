@@ -21,10 +21,11 @@ function App() {
 
   const [genresList, setGenresList] = useState(["piano"]);
 
-  function handleGenresListChange(newGenres) {
+  async function handleGenresListChange(newGenres) {
     setGenresList(newGenres);
     setActualInput(genresList.join(","));
-
+    await getFavorites(token);
+    renderFavorites();
   }
 
   useEffect(() => {
@@ -196,8 +197,8 @@ function App() {
   }
 
  const createActualPlaylist = async(mins, secs, tracks) => {
-  getFavorites(token);
-
+    let result = await getFavorites(token);
+  
     if (mins > 59 || mins < 0 || secs < 0 || secs > 59){
     alert("Not valid time");
     return;
