@@ -64,9 +64,9 @@ function App() {
   }
 
   const getFavorites = async (token) => {
-      console.log(genresList.join(","))
-      console.log("genresList")
-      console.log(token)
+      // console.log(genresList.join(","))
+      // console.log("genresList")
+      // console.log(token)
 
       const {data} = await axios.get('https://api.spotify.com/v1/recommendations', {
         params: {
@@ -78,7 +78,7 @@ function App() {
           }
       })
       
-      console.log(data)
+      // console.log(data)
       setFavorites(data)
     }
 
@@ -100,7 +100,7 @@ function App() {
            id: favorites.items[i].id, uri: favorites.items[i].uri, name: favorites.items[i].name})
         }*/
         return (
-          <div>
+          <div class = "rendered">
            <input className="input"
                      type="number"
                      value={mins}
