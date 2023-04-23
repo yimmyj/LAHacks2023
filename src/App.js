@@ -12,17 +12,20 @@ function App() {
   const [token, setToken] = useState("")
   const [userID, setID] = useState("")
   const [userData, setUserData] = useState({})
-  const [recents, setRecents] = useState([])
   const [favorites, setFavorites] = useState([])
   const [mins, setMins] = useState(null);
   const [secs, setSecs] = useState(null);
   const [playlistLink, setPlaylist] = useState("");
 
-  const [genresList, setGenresList] = useState("[]");
+  const [actualInput, setActualInput] = useState("rap,hip-hop");
+
+  const [genresList, setGenresList] = useState(["piano"]);
 
   function handleGenresListChange(newGenres) {
     setGenresList(newGenres);
-    console.log(genresList);
+    setActualInput(genresList.join(","));
+    console.log(genresList.join(","));
+
   }
 
   useEffect(() => {
@@ -41,7 +44,6 @@ function App() {
   const logout = () => {
     setToken("");
     setUserData({});
-    setRecents([]);
     setFavorites([]);
     setPlaylist("");
     window.localStorage.removeItem("token");
@@ -60,33 +62,37 @@ function App() {
 
   const loadEverything = async (token) => {
     console.log("LoadEverything clicked!!!!!");
-    getFavorites(token, "medium");
+    getFavorites(token);
   }
 
   const getFavorites = async (token) => {
-      const {data} = await axios.get("https://api.spotify.com/v1/me/top/tracks", {
+      console.log(genresList)
+      console.log("genresList")
+
+      const {data} = await axios.get('https://api.spotify.com/v1/recommendations', {
+        params: {
+          seed_genres: genresList.join(","),
+          limit: 100
+        },
           headers: {
               Authorization: `Bearer ${token}`
           }
       })
+      
       console.log(data)
       setFavorites(data)
     }
 
     const renderFavorites = () => {
-    console.log("RenderFavorites called!!!");
-      if(favorites.length === 0){
+      if(!favorites.tracks){
         return;
       }
       else{
-        let options = []
         //let topTracks = []
         let favoritesInfo = []
-        for(let i=0; i<favorites.items.length; i++){
-          favoritesInfo.push({key:i, duration: Math.round(favorites.items[i].duration_ms/1000),
-          uri: favorites.items[i].uri});
-
-          options.push({key: i, name: favorites.items[i].name, artist: favorites.items[i].artists[0].name})
+        for(let i=0; i<favorites.tracks.length; i++){
+          favoritesInfo.push({key:i, duration: Math.round(favorites.tracks[i].duration_ms/1000),
+          uri: favorites.tracks[i].uri});
         }
         //let pickedSongs = generatePlaylist(1200, trackLengths);
 
@@ -195,6 +201,8 @@ function App() {
   }
 
  const createActualPlaylist = async(mins, secs, tracks) => {
+  getFavorites();
+
     if (mins > 59 || mins < 0 || secs < 0 || secs > 59){
     alert("Not valid time");
     return;
