@@ -6,6 +6,7 @@ import Auth from './components/Auth'
 import Button from './components/Button'
 import User from './components/User'
 import Playlist from './components/Playlist'
+import ChatBox from './components/ChatBox';
 
 function App() {
   const [token, setToken] = useState("")
@@ -249,10 +250,13 @@ function App() {
         <div class="login-block">
           
           <h1 className="page-title">Music Glass</h1>
-        
 
         {!token ?
-          <Auth /> : <Playlist playlistLink={playlistLink}/>
+          <Auth /> : 
+          <>
+            <Playlist playlistLink={playlistLink}/>
+            <ChatBox />
+          </>
         }
         {renderFavorites()}
         <User userData={userData} logoutHandler={logout}/>
