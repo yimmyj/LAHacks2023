@@ -24,7 +24,6 @@ function App() {
   function handleGenresListChange(newGenres) {
     setGenresList(newGenres);
     setActualInput(genresList.join(","));
-    console.log(genresList.join(","));
 
   }
 
@@ -50,7 +49,6 @@ function App() {
   }
 
   const findUser = async (token) => {
-    console.log("FindUser clicked!!!!!");
     const {data} = await axios.get("https://api.spotify.com/v1/me", {
         headers: {
             Authorization: `Bearer ${token}`
@@ -61,17 +59,17 @@ function App() {
   }
 
   const loadEverything = async (token) => {
-    console.log("LoadEverything clicked!!!!!");
     getFavorites(token);
   }
 
   const getFavorites = async (token) => {
-      console.log(genresList)
+      console.log(genresList.join(","))
       console.log("genresList")
+      console.log(token)
 
       const {data} = await axios.get('https://api.spotify.com/v1/recommendations', {
         params: {
-          seed_genres: genresList.join(","),
+          seed_genres: actualInput,
           limit: 100
         },
           headers: {
@@ -152,8 +150,6 @@ function App() {
               }
           }
 
-          console.log("Closest time: " + currentCol);
-
 
           let currentRow = songs.length;
           let pickedSongs = [];
@@ -169,7 +165,6 @@ function App() {
                   currentRow--;
               }
           }
-          console.log(pickedSongs);
           return(pickedSongs);
   }
 
@@ -195,13 +190,13 @@ function App() {
    let seconds = time % 60;
    let minutes = Math.floor(time/60);
 
-   if (seconds < 10) seconds = "0"+seconds;
-   if (minutes < 10) minutes = "0"+minutes;
+   if (0 < seconds < 10) seconds = "0"+seconds;
+   if (0 < minutes < 10) minutes = "0"+minutes;
    return minutes+":"+seconds;
   }
 
  const createActualPlaylist = async(mins, secs, tracks) => {
-  getFavorites();
+  getFavorites(token);
 
     if (mins > 59 || mins < 0 || secs < 0 || secs > 59){
     alert("Not valid time");
@@ -255,7 +250,6 @@ function App() {
                     }})
 
      setPlaylist("https://open.spotify.com/embed/playlist/"+playlist_id+"?utm_source=generator");
-     console.log("PlaylistLink is: " + playlistLink);
  }
 
   return (
