@@ -7,11 +7,11 @@ const User = ({userData, logoutHandler}) => {
     else
         return (
           <div>
-            <p>
-                User found: {userData["display_name"]}
+            <p className= "user1">
+                Welcome {userData["display_name"]}
             </p>
-            <p>
-                Not you? <Button onClick={logoutHandler} text="Log out"/>
+            <p className= "user2">
+                Not you? <Button className="button" onClick={logoutHandler} text="Log out"/>
             </p>
           </div>
         );

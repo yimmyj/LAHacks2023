@@ -89,22 +89,24 @@ function App() {
         }*/
         return (
           <div>
-           <input
+           <input className="input"
                      type="number"
                      value={mins}
-                     placeholder="minutes"
+                     placeholder="00"
                      min = "0" max = "59"
                      onChange={(e) => setMins(e.target.value)}
+                     
                    />
-           <input
+           <p className="text">:</p>
+           <input className="input"
                      type="number"
                      value={secs}
-                     placeholder="seconds"
+                     placeholder="00"
                      min = "0" max = "59"
                      onChange={(e) => setSecs(e.target.value)}
                               />
 
-            <button id="button3" onClick={() => createActualPlaylist(mins, secs, favoritesInfo)}> Create Playlist </button>
+            <button className="button" onClick={() => createActualPlaylist(mins, secs, favoritesInfo)}> Create Playlist </button>
           </div>
         )
       }
