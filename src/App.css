@@ -50,7 +50,7 @@
   /* width: 100%; */
 }
 
-.button {
+button {
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 0.25rem;
@@ -158,14 +158,24 @@
 
 
 .title-img{
-width: 500.01px;
-height: 500.17px;
+  max-width: 100%;
+  height: auto;
+  width: 30vw; /* Adjust the value as needed */
 transform: rotate(7deg);
 position: fixed;
-bottom: 100px;
-right: -10px;
+bottom: 7.5vh;
+right: -2vw;
 /* width: 300px; */
 /* border: 3px solid #73AD21; */
 z-index:-1;
 /* background-color: #61dafb; */
 }
+
+.user2{
+  display: inline;
+  align-items: center;
+  justify-content: center;
+  background-color: beige;
+  
+}
+
