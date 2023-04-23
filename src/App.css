@@ -85,7 +85,7 @@
 
 .input:focus {
   outline-width: 0;
-  color: #D3D3D3;
+  color: white;
 }
 
 .input::-webkit-inner-spin-button {
