@@ -50,6 +50,68 @@
   /* width: 100%; */
 }
 
+.button {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  border-radius: 2rem;
+  border: 0;
+  text-decoration: none;
+  color: white;
+  background-color: 	#D3D3D3;
+  opacity: 0.9;
+  font-family: 'Quicksand';
+  margin-top: -25px;
+  display: inline-block;
+}
+
+.input {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  margin: 0.25rem;
+  font-family: 'Quicksand';
+  border: 0;
+  border-radius: 2rem;
+  width: 10%;
+  display: inline-block;
+  text-align: center;
+  opacity: 0.9;
+  color: white;
+  background-color: 	#D3D3D3;
+}
+
+.input:focus {
+  outline-width: 0;
+  color: #D3D3D3;
+}
+
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.text {
+  display: inline-block;
+}
+
+.user1 {
+  position: fixed;
+  top: -1.5rem;
+  right: 0;
+  margin: 2rem;
+  font-family: 'Quicksand';
+}
+.user2 {
+  position: fixed;
+  top: 0.5rem;
+  right: 0;
+  margin: 2rem;
+  font-family: 'Quicksand';
+}
+
 .App-header h1{
   font-family: 'Quicksand';
   /* background-color: black; */
@@ -80,9 +142,6 @@
   color: white;
   
 }
-
-
-
 
 .App-link {
   color: #61dafb;
