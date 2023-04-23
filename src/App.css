@@ -157,11 +157,12 @@ button {
   width: 30vw; /* Adjust the value as needed */
 transform: rotate(7deg);
 position: fixed;
-bottom: 7.5vh;
-right: -2vw;
+bottom: 9.5vh;
+right: 0vw;
 /* width: 300px; */
 /* border: 3px solid #73AD21; */
 z-index:-1;
+animation: rotate-back-and-forth 3s ease-in-out infinite;
 /* background-color: #61dafb; */
 }
 
@@ -177,11 +178,11 @@ z-index:-1;
 
 
 .div1 button{
-  /* margin-top: 0px; */
+  margin-top: -1rem;
   padding: none;
   background-color: #48398f;
   font-size: 1.2rem;
-  margin-top: auto;
+  /* margin-top: auto; */
 }
 .div1 button:hover{
 
@@ -226,4 +227,16 @@ button:hover{
   margin-left: 1rem;
   width: 2rem;
   /* background-color: #24146d; */
+}
+
+@keyframes rotate-back-and-forth {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
