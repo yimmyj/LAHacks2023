@@ -34,7 +34,7 @@
   text-decoration: none;
   width: 25rem;
   color: white;
-  background-color: 	#6658ab;
+  background-color: 	#48398f;
   opacity: 0.9;
   font-family: 'Quicksand';
   margin-top: -25px;
@@ -45,12 +45,12 @@
 .login-button:hover{
   /* color: black; */
   
-  background-color: #48398f;
+  background-color: #24146d;
   
   /* width: 100%; */
 }
 
-.button {
+button {
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 0.25rem;
@@ -73,6 +73,7 @@
   padding-bottom: 0.25rem;
   margin: 0.25rem;
   font-family: 'Quicksand';
+  /* font-size: large; */
   border: 0;
   border-radius: 2rem;
   width: 10%;
@@ -97,20 +98,7 @@
   display: inline-block;
 }
 
-.user1 {
-  position: fixed;
-  top: -1.5rem;
-  right: 0;
-  margin: 2rem;
-  font-family: 'Quicksand';
-}
-.user2 {
-  position: fixed;
-  top: 0.5rem;
-  right: 0;
-  margin: 2rem;
-  font-family: 'Quicksand';
-}
+
 
 .App-header h1{
   font-family: 'Quicksand';
@@ -158,14 +146,72 @@
 
 
 .title-img{
-width: 500.01px;
-height: 500.17px;
+  max-width: 100%;
+  height: auto;
+  width: 30vw; /* Adjust the value as needed */
 transform: rotate(7deg);
 position: fixed;
-bottom: 100px;
-right: -10px;
+bottom: 7.5vh;
+right: -2vw;
 /* width: 300px; */
 /* border: 3px solid #73AD21; */
 z-index:-1;
 /* background-color: #61dafb; */
+}
+
+.user2{
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  /* background-color: beige; */
+  margin-top: 0.5em;
+  max-width: 100%;
+  font-size: 1rem;
+}
+
+
+.div1 button{
+  /* margin-top: 0px; */
+  padding: none;
+  background-color: #48398f;
+  font-size: 1.2rem;
+  margin-top: auto;
+}
+.div1 button:hover{
+
+  background-color: #24146d;
+}
+
+button:hover{
+  cursor:pointer;
+}
+
+.div1 {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: -1.5rem;
+  right: 0;
+  margin: 2rem;
+  font-family: 'Quicksand';
+  /* background-color: #48398f; */
+  align-items: flex-end;
+}
+
+
+
+/* .user2 {
+  position: fixed;
+  top: 0.5rem;
+  right: 0;
+  margin: 2rem;
+  font-family: 'Quicksand';
+} */
+
+.subbutton:hover{
+  background-color: #24146d;
+}
+
+.subbutton{
+  background-color: #48398f;
 }
