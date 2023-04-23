@@ -172,7 +172,7 @@ input[type="text"] {
 }
 
 .App-header iframe{
-  background-color: #24146d;
+  /* background-color: #24146d; */
   margin-top: -1rem;
   margin-bottom: 1.5rem;
 }
